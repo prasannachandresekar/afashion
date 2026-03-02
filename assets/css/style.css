@@ -1,0 +1,331 @@
+/* Base Variables */
+:root {
+    --primary: #d8b4a0;
+    --secondary: #2c2c2c;
+    --tertiary: #f4f2f0;
+    --bg-color: #ffffff;
+    --text-color: #2c2c2c;
+    --card-bg: #ffffff;
+
+    /* Additional custom variables for UI elements */
+    --input-bg: #ffffff;
+    --input-border: #e0e0e0;
+    --footer-bg: #fafafa;
+    --footer-border: #eeeeee;
+    --border-color: #eeeeee;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-color: #1e1e1e;
+    --text-color: #f5f5f5;
+    --card-bg: #2a2a2a;
+
+    /* Overrides for dark mode UI elements */
+    --input-bg: #2a2a2a;
+    --input-border: #444444;
+    --footer-bg: #141414;
+    --footer-border: #2a2a2a;
+    --border-color: #333333;
+}
+
+/* Global Styles */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary);
+}
+
+/* Typography & Colors fixes */
+.text-muted {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Header & Navigation */
+.header-nav {
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var(--primary);
+}
+
+.theme-toggle-btn {
+    color: var(--text-color);
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.theme-toggle-btn:hover {
+    color: var(--primary);
+}
+
+.cart-icon {
+    color: var(--text-color);
+}
+
+/* Custom Overrides for Bootstrap Primary variations safely */
+body .cart-badge {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 0.65rem;
+    padding: 0.35em 0.55em;
+    transform: translateY(-50%);
+}
+
+/* Offcanvas */
+.offcanvas {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Toggle correct filter for close buttons manually since invert() on images is not allowed by instruction:
+   "Do NOT use filter: invert(). Do NOT invert images." 
+   Wait, the instruction says "Do NOT use filter: invert()". 
+   So I will use CSS data-bs-theme property or custom drawn icons instead.
+   Actually, Bootstrap allows applying color via text for SVGs, or we can just use CSS to style it. */
+.offcanvas-close-btn {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232c2c2c'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    opacity: 0.5;
+}
+
+body.dark-mode .offcanvas-close-btn {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f5f5f5'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    opacity: 0.8;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(44, 44, 44, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+body.dark-mode .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 245, 245, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Buttons */
+body .btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+body .btn-primary:hover,
+body .btn-primary:focus {
+    background-color: #c49d87;
+    border-color: #c49d87;
+    color: #ffffff;
+}
+
+body .btn-outline-primary {
+    color: var(--text-color);
+    border-color: var(--text-color);
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+body .btn-outline-primary:hover,
+body .btn-outline-primary:focus {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+body .btn-outline-secondary {
+    color: var(--text-color);
+    border-color: var(--border-color);
+    transition: all 0.3s ease;
+}
+
+body .btn-outline-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Footer */
+.site-footer {
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--footer-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-heading {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--primary);
+}
+
+.footer-text {
+    opacity: 0.8;
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 1;
+    color: var(--primary);
+}
+
+.newsletter-form .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+}
+
+.newsletter-form .form-control::placeholder {
+    color: var(--text-color);
+    opacity: 0.5;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Extended Sections (Index) */
+.hero-section {
+    background-color: var(--tertiary);
+}
+
+.hero-img {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.category-img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.category-overlay {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.product-img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.cart-dropdown-menu {
+    width: 320px;
+}
+
+.cart-items-container {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.cart-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.btn-hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.btn-hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.category-item img {
+    transition: transform 0.5s ease;
+}
+
+.category-item:hover img {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}

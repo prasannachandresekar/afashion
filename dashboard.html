@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aveline Admin Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #c9a98e;
+            --secondary: #e6dace;
+            --tertiary: #f4f0ec;
+            --text-color: #333333;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e5e5e5;
+            --sidebar-bg: #f8f9fa;
+        }
+
+        body.admin-dark-mode {
+            --primary: #c9a98e;
+            --secondary: #e6dace;
+            --tertiary: #2a2a2a;
+            --text-color: #f8f9fa;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --sidebar-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        /* Layout */
+        .wrapper {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.85rem 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.2s;
+            opacity: 0.8;
+            font-weight: 500;
+            gap: 12px;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            opacity: 1;
+            background-color: var(--tertiary);
+            border-left: 4px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .sidebar-link.text-danger:hover {
+            color: #dc3545 !important;
+            border-left-color: #dc3545;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .top-navbar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .content-area {
+            padding: 2rem;
+            background-color: var(--bg-color);
+            flex-grow: 1;
+        }
+
+        /* Cards */
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--tertiary);
+            color: var(--primary);
+            border-radius: 8px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Tables */
+        .table {
+            color: var(--text-color);
+        }
+
+        .table-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .table th,
+        .table td {
+            border-color: var(--border-color);
+            background-color: transparent;
+            color: var(--text-color);
+        }
+
+        .table th {
+            font-weight: 600;
+            opacity: 0.8;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Theme Toggle */
+        .admin-theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                height: 100vh;
+                z-index: 1050;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 1040;
+                backdrop-filter: blur(2px);
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .content-area {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Overlay for mobile sidebar -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar shadow-sm" id="sidebar">
+            <div class="sidebar-header d-flex justify-content-between align-items-center">
+                <a href="dashboard.html" class="logo-text fs-4">Aveline Admin</a>
+                <button class="btn d-md-none border-0 p-1" id="closeSidebar">
+                    <i class="bi bi-x-lg fs-5" style="color: var(--text-color);"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="sidebar-link active">
+                    <i class="bi bi-grid-fill"></i> Dashboard
+                </a>
+                <a href="#orders" class="sidebar-link">
+                    <i class="bi bi-bag-fill"></i> Orders
+                </a>
+                <a href="#customers" class="sidebar-link">
+                    <i class="bi bi-people-fill"></i> Customers
+                </a>
+                <a href="#messages" class="sidebar-link">
+                    <i class="bi bi-chat-left-text-fill"></i> Messages
+                </a>
+                <a href="index.html" class="sidebar-link text-danger mt-5">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <button class="btn d-md-none border-0 px-0 me-3" id="openSidebar">
+                        <i class="bi bi-list fs-3" style="color: var(--text-color);"></i>
+                    </button>
+                    <div class="fw-semibold fs-5 d-none d-md-block">Overview</div>
+                </div>
+
+                <div class="d-flex align-items-center gap-4">
+                    <button class="admin-theme-toggle" id="adminThemeToggle" aria-label="Toggle Admin Theme">
+                        <i class="bi bi-moon-fill dark-icon"></i>
+                        <i class="bi bi-sun-fill light-icon" style="display:none;"></i>
+                    </button>
+                    <div class="d-flex align-items-center gap-2 border-start ps-3 border-opacity-25"
+                        style="border-color: var(--border-color) !important;">
+                        <span class="fw-medium d-none d-sm-block">Admin User</span>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white"
+                            style="width: 35px; height: 35px; background: var(--primary);">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Area -->
+            <div class="content-area" id="dashboard">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 fw-bold mb-0">Dashboard</h1>
+                    <span class="text-muted small" id="currentDate"></span>
+                </div>
+
+                <!-- Analytics Cards -->
+                <div class="row g-4 mb-4">
+                    <!-- Total Orders -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card d-flex align-items-center gap-3 shadow-sm h-100">
+                            <div class="stat-icon">
+                                <i class="bi bi-bag-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1 small fw-semibold text-uppercase letter-spacing-1">Total
+                                    Orders</p>
+                                <h3 class="fw-bold mb-0" id="statOrders">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Revenue -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card d-flex align-items-center gap-3 shadow-sm h-100">
+                            <div class="stat-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1 small fw-semibold text-uppercase letter-spacing-1">Total
+                                    Revenue</p>
+                                <h3 class="fw-bold mb-0 text-primary" id="statRevenue">$0.00</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Customers -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card d-flex align-items-center gap-3 shadow-sm h-100">
+                            <div class="stat-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1 small fw-semibold text-uppercase letter-spacing-1">Total
+                                    Customers</p>
+                                <h3 class="fw-bold mb-0">124</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Messages -->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card d-flex align-items-center gap-3 shadow-sm h-100">
+                            <div class="stat-icon">
+                                <i class="bi bi-chat-left-text"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted mb-1 small fw-semibold text-uppercase letter-spacing-1">Total
+                                    Messages</p>
+                                <h3 class="fw-bold mb-0">8</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="table-container shadow-sm mb-4" id="orders">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="h5 fw-bold mb-0">Recent Orders</h4>
+                        <button class="btn btn-sm btn-outline-primary">View All</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0 text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Total Items</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <!-- Orders populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Customers & Messages Rows -->
+                <div class="row g-4">
+                    <!-- Customers -->
+                    <div class="col-lg-6">
+                        <div class="table-container shadow-sm h-100" id="customers">
+                            <h4 class="h5 fw-bold mb-4">Recent Customers</h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-medium">Eleanor Vance</td>
+                                            <td class="text-muted">eleanor@example.com</td>
+                                            <td><span class="badge bg-success rounded-pill fw-normal px-2">Active</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">Marcus Chen</td>
+                                            <td class="text-muted">marcus@example.com</td>
+                                            <td><span class="badge bg-success rounded-pill fw-normal px-2">Active</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">Sophia Rossi</td>
+                                            <td class="text-muted">sophia@example.com</td>
+                                            <td><span
+                                                    class="badge bg-secondary rounded-pill fw-normal px-2">Inactive</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">James Wilson</td>
+                                            <td class="text-muted">james.w@example.com</td>
+                                            <td><span class="badge bg-success rounded-pill fw-normal px-2">Active</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="col-lg-6">
+                        <div class="table-container shadow-sm h-100" id="messages">
+                            <h4 class="h5 fw-bold mb-4">Latest Messages</h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>From</th>
+                                            <th>Subject</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-medium">David Smith</td>
+                                            <td class="text-muted">Shipping inquiry #8392</td>
+                                            <td class="text-end"><button
+                                                    class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-1">Reply</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">Emma Johnson</td>
+                                            <td class="text-muted">Return process clarification</td>
+                                            <td class="text-end"><button
+                                                    class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-1">Reply</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">Liam Brown</td>
+                                            <td class="text-muted">Sizing guide assistance</td>
+                                            <td class="text-end"><button
+                                                    class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-1">Reply</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-medium">Olivia Davis</td>
+                                            <td class="text-muted">Product restock notification</td>
+                                            <td class="text-end"><button
+                                                    class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-1">Reply</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Dashboard JS -->
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>

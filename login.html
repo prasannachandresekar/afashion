@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Aveline Luxury Fashion</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .auth-section {
+            background-color: var(--tertiary);
+        }
+
+        .auth-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border-color: var(--border-color) !important;
+        }
+
+        .form-control {
+            background-color: var(--input-bg);
+            border-color: var(--input-border);
+            color: var(--text-color);
+            padding: 0.75rem 1rem;
+        }
+
+        .form-control:focus {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border-color: var(--primary);
+            box-shadow: none;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.6;
+            margin: 1.5rem 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-divider:not(:empty)::before {
+            margin-right: .5em;
+        }
+
+        .auth-divider:not(:empty)::after {
+            margin-left: .5em;
+        }
+
+        .social-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: var(--tertiary);
+            color: var(--text-color);
+            border-color: var(--primary);
+        }
+
+        .auth-theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Theme Toggle -->
+    <button class="btn theme-toggle-btn auth-theme-toggle" aria-label="Toggle Theme">
+        <i class="bi bi-moon-fill dark-icon"></i>
+        <i class="bi bi-sun-fill light-icon" style="display:none;"></i>
+    </button>
+
+    <section class="auth-section d-flex align-items-center justify-content-center min-vh-100 py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-7">
+
+                    <!-- Brand Logo -->
+                    <div class="text-center mb-4">
+                        <a href="index.html" class="logo-text fw-bold fs-1 text-decoration-none"
+                            style="color: var(--text-color);">
+                            Aveline
+                        </a>
+                        <p class="text-muted mt-2 mb-0 tracking-wider text-uppercase"
+                            style="letter-spacing: 1px; font-size: 0.85rem;">Welcome Back</p>
+                    </div>
+
+                    <!-- Auth Card -->
+                    <div class="card auth-card p-4 p-md-5 shadow-sm border">
+                        <h2 class="h4 fw-bold mb-4 text-center">Login to your account</h2>
+
+                        <form id="loginForm" class="auth-form" novalidate>
+                            <div class="mb-4">
+                                <label for="loginEmail" class="form-label fw-medium">Email Address</label>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email"
+                                    required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label for="loginPassword" class="form-label fw-medium mb-0">Password</label>
+                                    <a href="#" class="text-decoration-none text-primary small">Forgot Password?</a>
+                                </div>
+                                <input type="password" class="form-control mt-2" id="loginPassword"
+                                    placeholder="Enter your password" required>
+                                <div class="invalid-feedback">Please enter your password.</div>
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label text-muted" for="rememberMe">Remember me for 30
+                                    days</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Sign In</button>
+                        </form>
+
+                        <div class="auth-divider">or continue with</div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <button
+                                    class="btn social-btn w-100 py-2 d-flex justify-content-center align-items-center gap-2">
+                                    <i class="bi bi-google"></i> Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button
+                                    class="btn social-btn w-100 py-2 d-flex justify-content-center align-items-center gap-2">
+                                    <i class="bi bi-facebook" style="color: #1877F2;"></i> Facebook
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="text-center text-muted mb-0">
+                            Don't have an account? <a href="register.html"
+                                class="text-primary text-decoration-none fw-medium d-inline-block">Sign up here</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

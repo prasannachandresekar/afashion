@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casual Wear Collection | Aveline Luxury Fashion</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .collection-hero {
+            height: 40vh;
+            min-height: 400px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .filter-buttons .btn {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin: 0.25rem;
+        }
+
+        /* Support overriding bootstrap accordion to blend with the elegant theme */
+        .accordion-item {
+            background-color: transparent;
+            border-color: var(--border-color);
+        }
+
+        .accordion-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--tertiary);
+            color: var(--text-color);
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--border-color);
+        }
+
+        .accordion-body {
+            color: var(--text-color);
+            opacity: 0.8;
+            background-color: var(--bg-color);
+        }
+
+        body.dark-mode .accordion-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        body.dark-mode .accordion-button:not(.collapsed) {
+            background-color: #333333;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .accordion-body {
+            background-color: var(--bg-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Offcanvas Menu (Mobile) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title logo-text" id="mobileMenuLabel">Aveline</h5>
+            <button type="button" class="btn-close offcanvas-close-btn" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav mb-4">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="services.html">Collections</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+            <div class="d-flex flex-column gap-3">
+                <button class="btn btn-outline-primary w-100">Login</button>
+                <button class="btn btn-primary w-100">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header System -->
+    <header class="header-nav shadow-sm sticky-top">
+        <!-- Desktop Navbar -->
+        <nav class="navbar navbar-expand-lg d-none d-lg-flex py-3">
+            <div class="container">
+                <a class="navbar-brand logo-text" href="index.html">Aveline</a>
+
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav gap-4">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="homeDropdownDesktop" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Home
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="homeDropdownDesktop">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="home-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Collections</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-actions d-flex align-items-center gap-3">
+                    <button class="btn theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="bi bi-moon-fill dark-icon"></i>
+                        <i class="bi bi-sun-fill light-icon" style="display:none;"></i>
+                    </button>
+                    <div class="dropdown">
+                        <a href="#" class="position-relative text-decoration-none cart-icon pe-2"
+                            data-bs-toggle="dropdown" aria-expanded="false" id="desktopCartDropdown">
+                            <i class="bi bi-handbag fs-5"></i>
+                            <span
+                                class="position-absolute top-100 start-100 translate-middle badge rounded-pill cart-badge cart-count">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 cart-dropdown-menu shadow-sm"
+                            aria-labelledby="desktopCartDropdown">
+                            <li>
+                                <div class="cart-items-container">
+                                    <p class="text-center text-muted my-2">Your cart is empty.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="d-flex justify-content-between fw-bold mb-3">
+                                <span>Total:</span>
+                                <span class="cart-total-price">$0.00</span>
+                            </li>
+                            <li>
+                                <button class="btn btn-primary w-100 simulate-checkout-btn">Simulate Checkout</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="login.html" class="btn btn-outline-primary ms-3">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                    <a href="dashboard.html" class="btn btn-secondary d-flex align-items-center"><i
+                            class="bi bi-grid-fill me-2"></i>Dashboard</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navbar -->
+        <nav class="navbar d-flex d-lg-none py-2 px-3">
+            <div class="container-fluid px-0">
+                <button class="navbar-toggler custom-toggler border-0 px-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand logo-text mx-auto" href="index.html">Aveline</a>
+
+                <div class="nav-actions d-flex align-items-center gap-3">
+                    <button class="btn theme-toggle-btn p-0" aria-label="Toggle Theme">
+                        <i class="bi bi-moon-fill dark-icon"></i>
+                        <i class="bi bi-sun-fill light-icon" style="display:none;"></i>
+                    </button>
+                    <div class="dropdown">
+                        <a href="#" class="position-relative text-decoration-none cart-icon" data-bs-toggle="dropdown"
+                            aria-expanded="false" id="mobileCartDropdown">
+                            <i class="bi bi-handbag fs-5"></i>
+                            <span
+                                class="position-absolute top-100 start-100 translate-middle badge rounded-pill cart-badge cart-count">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-3 cart-dropdown-menu shadow-sm position-absolute"
+                            aria-labelledby="mobileCartDropdown">
+                            <li>
+                                <div class="cart-items-container">
+                                    <p class="text-center text-muted my-2">Your cart is empty.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="d-flex justify-content-between fw-bold mb-3">
+                                <span>Total:</span>
+                                <span class="cart-total-price">$0.00</span>
+                            </li>
+                            <li>
+                                <button class="btn btn-primary w-100 simulate-checkout-btn">Simulate Checkout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Checkout Alert -->
+        <div id="checkoutAlert"
+            class="alert alert-success alert-dismissible fade d-none position-fixed top-0 start-50 translate-middle-x mt-3 shadow-sm checkout-alert"
+            role="alert" style="z-index: 9999;">
+            Order placed successfully!
+            <button type="button" class="btn-close alert-close-btn" aria-label="Close"></button>
+        </div>
+
+        <!-- Collection Hero Section -->
+        <section class="collection-hero d-flex align-items-center justify-content-center text-center">
+            <div class="container px-4">
+                <h1 class="display-4 fw-bold text-white mb-3">Casual Wear Collection</h1>
+                <p class="lead text-white opacity-75 max-w-md mx-auto">Embrace comfort without compromising on elegance.
+                    A curated selection of everyday essentials.</p>
+            </div>
+        </section>
+
+        <!-- Filter Buttons Section -->
+        <section class="py-5 bg-transparent">
+            <div class="container text-center">
+                <div class="filter-buttons mb-4">
+                    <button class="btn btn-primary">All</button>
+                    <button class="btn btn-outline-secondary">Dresses</button>
+                    <button class="btn btn-outline-secondary">Tops</button>
+                    <button class="btn btn-outline-secondary">Shoes</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Section -->
+        <section class="py-2 mb-5">
+            <div class="container">
+                <div class="row g-4">
+                    <!-- Product 1 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Soft Knit Dress">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Soft Knit Dress</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$65.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p5"
+                                    data-name="Soft Knit Dress" data-price="65"
+                                    data-img="https://images.unsplash.com/photo-1550639525-c97d455acf70?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1598554747436-c9293d6a588f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Classic White Shirt">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Classic White Shirt</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$45.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p6"
+                                    data-name="Classic White Shirt" data-price="45"
+                                    data-img="https://images.unsplash.com/photo-1598554747436-c9293d6a588f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Tailored Blazer">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Tailored Blazer</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$110.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p7"
+                                    data-name="Tailored Blazer" data-price="110"
+                                    data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1509631179647-0c500ba14194?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Wide Leg Pants">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Wide Leg Pants</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$85.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p8"
+                                    data-name="Wide Leg Pants" data-price="85"
+                                    data-img="https://images.unsplash.com/photo-1509631179647-0c500ba14194?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 5 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Minimal Sandals">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Minimal Sandals</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$70.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p9"
+                                    data-name="Minimal Sandals" data-price="70"
+                                    data-img="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product 6 -->
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="position-relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    class="card-img-top rounded-0 product-img" alt="Neutral Handbag">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title fs-5 mb-2">Neutral Handbag</h5>
+                                <p class="card-text fw-bold mb-3 fs-5">$95.00</p>
+                                <button class="btn btn-primary w-100 add-to-cart-btn" data-id="p10"
+                                    data-name="Neutral Handbag" data-price="95"
+                                    data-img="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80">Add
+                                    to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-5 mb-5 bg-transparent">
+            <div class="container overflow-hidden">
+                <div class="text-center mb-5">
+                    <h2 class="display-6 fw-bold">Frequently Asked Questions</h2>
+                    <p class="text-muted">Find out more about our services</p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="accordion" id="faqAccordion">
+                            <!-- Question 1 -->
+                            <div class="accordion-item mb-3 border bg-transparent rounded">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button rounded" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Shipping Policy
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        We currently offer standard and expedited shipping on all orders. Standard
+                                        shipping typically takes between 3-5 business days. International shipping
+                                        depends on your global location. Orders placed before noon will typically
+                                        process same-day.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Question 2 -->
+                            <div class="accordion-item mb-3 border bg-transparent rounded">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed rounded" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseTwo">
+                                        Return Policy
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        If for any reason you are not completely satisfied with your purchase, you may
+                                        return any item in its original condition within 30 days of receipt and we will
+                                        gladly provide a refund, replacement, or an exchange.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Question 3 -->
+                            <div class="accordion-item mb-3 border bg-transparent rounded">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed rounded" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Size Guide
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Our garments generally run true to size and conform to standard US measurements.
+                                        For specific sizing inquiries, please reference our detailed dimension chart
+                                        available under contact support or email our style team.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 mb-4">
+                <!-- Brand + Social -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h3 class="logo-text mb-3">Aveline</h3>
+                    <p class="mb-3 footer-text">Elevating your everyday style with luxury fashion essentials.</p>
+                    <div class="d-flex gap-3 social-links">
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <!-- Company Links -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-heading mb-3">Company</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                        <li class="mb-2"><a href="#">Careers</a></li>
+                        <li class="mb-2"><a href="#">Our Stores</a></li>
+                        <li class="mb-2"><a href="#">Terms & Conditions</a></li>
+                        <li class="mb-2"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Links -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-heading mb-3">Support</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="#">Customer Service</a></li>
+                        <li class="mb-2"><a href="#">Shipping & Returns</a></li>
+                        <li class="mb-2"><a href="#">Size Guide</a></li>
+                        <li class="mb-2"><a href="#">FAQ</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Form -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-heading mb-3">Newsletter</h5>
+                    <p class="footer-text mb-3">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row mt-4 pt-4 footer-bottom">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 footer-text">&copy; 2026 Aveline. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <button class="btn btn-sm btn-outline-secondary back-to-top" id="backToTop">
+                        Back to top <i class="bi bi-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
