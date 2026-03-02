@@ -446,3 +446,9 @@ body.dark-mode .dropdown-menu {
     height: 42px;
     width: auto;
 }
+
+/* Footer Logo */
+.footer-logo img {
+    height: 38px;
+    width: auto;
+}
