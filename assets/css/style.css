@@ -441,3 +441,8 @@ body.dark-mode .offcanvas {
 body.dark-mode .dropdown-menu {
     background-color: var(--card-bg) !important;
 }
+
+.site-logo {
+    height: 42px;
+    width: auto;
+}
